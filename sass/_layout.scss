@@ -1,0 +1,24 @@
+::selection {
+    background: $brand-primary;
+    color: $color-white;
+}
+
+root {
+    @extend .flex;
+    @extend .flex__column;
+    @extend .mv0;
+    @extend .margin-center;
+    @extend .pv0;
+    @extend .ph\+\+;
+    @extend .border-box;
+    
+    width: 1300px;
+    min-height: 100vh;
+    font-family: $font-primary;
+    font-size: 16px;
+    color: $text-color;
+}
+
+main {
+    @extend .mt\+\+\+\+;
+}

@@ -1,10 +1,1 @@
-libreread.db
-uploads
-*.DS_Store
-*.js.map
-dump.rdb
-lr_index.bleve
-out
-.env
-redis-data
-libreread-data
+node_modules/

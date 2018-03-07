@@ -1,0 +1,76 @@
+.currently-reading {
+    @extend .w1\/1;
+    @extend .p\+;
+    @extend .border-box;
+
+    min-height: 380px;
+    background: $brand-secondary;
+
+    &__header {
+        @extend .w1\/1;
+        @extend .fs\+;
+        @extend .fw\+;
+
+        height: 40px;
+    }
+
+    &__title {
+        @extend .pull-left;
+        @extend .p;
+
+        float: left;
+        background: $color-white;
+    }
+
+    &__nav {
+        @extend .flex;
+        @extend .pull-right;
+        @extend .border-box;
+
+        &-item {
+            @extend .flex;
+            @extend .flex__center;
+            @extend .flex__justify-center;
+            @extend .cursor-pointer;
+
+            width: 51px;
+            height: 40px;
+            background: $color-white;
+
+            &:first-child {
+                @extend .mr\+\+;
+            }
+
+            &:hover {
+                @extend .svg-hover__stroke--reverse;
+                
+                background: $brand-primary;
+            }
+        }
+    }
+
+    &__main {
+        @extend .rel-pos;
+        @extend .w1\/1;
+        @extend .mt\+\+;
+        @extend .overflow-hidden;
+
+        height: 300px;
+    }
+
+    &__list {
+        @extend .flex;
+        @extend .rel-pos;
+
+        left: 0;
+        transition: left 0.2s;
+    }
+
+    &__item {
+        @extend .books-container__item;
+
+        &:nth-child(5n) {
+            @extend .mr\+\+;
+        }
+    }
+}

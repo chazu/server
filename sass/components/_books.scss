@@ -1,0 +1,71 @@
+.books-container {
+    @extend .mt\+\+\+\+;
+
+    &__header {
+        @extend .overflow-hidden;
+    }
+
+    &__options {
+        @extend .fs;
+        
+        width: 190px;
+        height: 30px;
+    }
+
+    &__main {
+        @extend .flex;
+        @extend .clearfix;
+        @extend .mt\+\+;
+    }
+
+    &__list {
+        @extend .flex;
+        @extend .flex__wrap;
+
+        width: 995px;
+    }
+
+    &__item {
+        @extend .mr\+\+;
+        @extend .mb\+\+;
+        @extend .book-hover;
+
+        &:nth-child(5n) {
+            @extend .mr0;
+        }
+
+        img {
+            @extend .border-box;
+    
+            width: 175px;
+            border: 2px solid transparent;
+        }
+    }
+
+    &__sidebar {
+        @extend .ml\+\+;
+
+        width: 215px;
+
+        & > div {
+            @extend .p;
+            
+            background: $brand-secondary;
+
+            &:first-child {
+                margin-bottom: 30px;
+            }
+        }
+
+        &-title {
+            @extend .fw\+;
+        }
+
+        li {
+            @extend .flex;
+            @extend .flex__center;
+            @extend .lh;
+            @extend .mt;
+        }
+    }
+}

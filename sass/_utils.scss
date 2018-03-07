@@ -1,0 +1,311 @@
+@mixin spacing-variations($properties...) {
+    @each $property in $properties {
+        #{$property}: 10px !important;
+
+        &0 {
+            #{$property}: 0 !important;
+        }
+
+        $modifier-sign: \+;
+        @for $i from 2 through 5 {
+            &#{$modifier-sign} {
+                #{$property}: floor(10px * $i) !important;
+            }
+            $modifier-sign: $modifier-sign + \+; // append string
+        }
+
+        &\- {
+            #{$property}: floor(10px / 2) !important;
+        }
+        &\-\- {
+            #{$property}: floor(10px / 4) !important;
+        }
+    }
+}
+
+.m { // margin
+    @include spacing-variations(margin);
+}
+
+.mt { // margin top
+    @include spacing-variations(margin-top);
+}
+
+.mb { // margin bottom
+    @include spacing-variations(margin-bottom);
+}
+
+.ml { // margin left
+    @include spacing-variations(margin-left);
+}
+
+.mr { // margin right
+    @include spacing-variations(margin-right);
+}
+
+.mv { // margin vertical
+    @include spacing-variations(margin-top, margin-bottom);
+}
+
+.mh { // margin horizontal
+    @include spacing-variations(margin-left, margin-right);
+}
+
+.p { // padding
+    @include spacing-variations(padding);
+}
+
+.pt { // padding top
+    @include spacing-variations(padding-top);
+}
+
+.pb { // padding bottom
+    @include spacing-variations(padding-bottom);
+}
+
+.pl { // padding left
+    @include spacing-variations(padding-left);
+}
+
+.pr { // padding right
+    @include spacing-variations(padding-right);
+}
+
+.pv { // padding vertical
+    @include spacing-variations(padding-top, padding-bottom);
+}
+
+.ph { // padding horizontal
+    @include spacing-variations(padding-left, padding-right);
+}
+
+.fs {
+    font-size: 16px;
+
+    &\+ {
+        font-size: 20px;
+    }
+
+    &\+\+ {
+        font-size: 38px;
+    }
+
+    &\- {
+        font-size: 14px;
+    }
+
+    &\-\- {
+        font-size: 12px;
+    }
+}
+
+.fw {
+    font-weight: 400;
+
+    &\+ {
+        font-weight: 600;
+    }
+}
+
+.lh {
+    line-height: 20px;
+}
+
+.w {
+    @for $i from 1 through 5 {
+        &1\/#{$i} {
+            width: percentage(1/$i) !important;
+        }
+    }
+}
+
+.mw {
+    @for $i from 1 through 5 {
+        &1\/#{$i} {
+            max-width: percentage(1/$i) !important;
+        }
+    }
+}
+
+.block {
+    display: block;
+}
+
+.margin-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flex {
+    display: flex;
+
+    &__column {
+        flex-direction: column;
+    }
+
+    &__start {
+        align-items: flex-start;
+    }
+
+    &__end {
+        align-items: flex-end;
+    }
+
+    &__baseline {
+        align-items: baseline;
+    }
+
+    &__center {
+        align-items: center;
+    }
+
+    &__space-between {
+        justify-content: space-between;
+    }
+
+    &__justify-start {
+        justify-content: flex-start;
+    }
+
+    &__justify-end {
+        justify-content: flex-end;
+    }
+
+    &__justify-center {
+        justify-content: center;
+    }
+
+    &__wrap {
+        flex-wrap: wrap;
+    }
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.abs-pos {
+    position: absolute;
+}
+
+.abs-center {
+    position: absolute;
+    left: 50%;
+}
+
+.rel-pos {
+    position: relative;
+}
+
+.border {
+    border: 1px solid $border-color;
+}
+
+.border-hover {
+    &:hover {
+        border: 1px solid $brand-primary;
+    }
+}
+
+.border-focus {
+    &:focus {
+        border: 1px solid $brand-primary;
+    }
+}
+
+.border-circle {
+    border-radius: 100%;
+}
+
+.outline-none {
+    outline: none;
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+
+.nolink {
+    color: $brand-tertiary;
+    text-decoration: none;
+    outline: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+label, input, select {
+    font-family: $font-primary;
+    font-size: 16px;
+    outline: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-hover {
+    &:hover {
+        color: $brand-primary;
+    }
+}
+
+.svg-hover {
+    &__fill {
+        &:hover {
+            g {
+                fill: $brand-primary;
+            }
+        }
+
+        &--reverse {
+            &:hover {
+                g {
+                    fill: $color-white;
+                }
+            }
+        }
+    }
+    &:hover {
+        g {
+            fill: $brand-primary;
+        }
+    }
+
+    &__stroke {
+        &:hover {
+            g {
+                stroke: $brand-primary;
+            }
+        }
+
+        &--reverse {
+            &:hover {
+                g {
+                    stroke: $color-white;
+                }
+            }
+        }
+    }
+}
+
+.book-hover {
+    &:hover {
+        img {
+            border: 2px solid $brand-primary;
+        }
+    }
+}
+
+.clearfix {
+    clear: both;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
