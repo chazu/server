@@ -69,7 +69,7 @@ func StartServer() {
 	r.Static("/static", path.Join(assetPath, "static"))
 
 	// HTML rendering
-	r.LoadHTMLGlob(path.Join(assetPath, "templates/index.html"))
+	r.LoadHTMLGlob(path.Join(assetPath, "templates/*"))
 
 	// Gin handlers
 	r.GET("/", home.Home)

@@ -202,11 +202,11 @@ root {
 
 .mr {
   margin-right: 10px !important; }
-  .mr0, .books-container__item:nth-child(5n), .currently-reading__item:nth-child(5n) {
+  .mr0, .nav-right__item:last-child, .books-container__item:nth-child(5n), .currently-reading__item:nth-child(5n) {
     margin-right: 0 !important; }
   .mr\+ {
     margin-right: 20px !important; }
-  .mr\+\+, .nav-right__item:first-child, .books-container__item, .currently-reading__item, .currently-reading__nav-item:first-child, .currently-reading__item:nth-child(5n) {
+  .mr\+\+, .nav-right__item, .books-container__item, .currently-reading__item, .currently-reading__nav-item:first-child, .currently-reading__item:nth-child(5n) {
     margin-right: 30px !important; }
   .mr\+\+\+ {
     margin-right: 40px !important; }
@@ -495,7 +495,7 @@ root {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column; }
-  .flex__start, .nav-right__item {
+  .flex__start {
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start; }
@@ -507,7 +507,7 @@ root {
     -webkit-box-align: baseline;
     -ms-flex-align: baseline;
     align-items: baseline; }
-  .flex__center, header, .books-container__sidebar li, .currently-reading__nav-item {
+  .flex__center, header, .nav-right__item, .books-container__sidebar li, .currently-reading__nav-item {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center; }

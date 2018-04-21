@@ -46,15 +46,16 @@ header {
 
     &__item {
         @extend .flex;
-        @extend .flex__start;
+        @extend .flex__center;
         @extend .rel-pos;
         @extend .nolink;
         @extend .cursor-pointer;
         @extend .text-hover;
         @extend .svg-hover__fill;
+        @extend .mr\+\+;
 
-        &:first-child {
-            @extend .mr\+\+;
+        &:last-child {
+            @extend .mr0;
         }
 
         svg {
