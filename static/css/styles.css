@@ -77,6 +77,8 @@ header {
     color: #FFFFFF;
     top: -9px;
     left: 8px; }
+  .nav-right #uploadBooks {
+    display: none; }
 
 .books-container__options {
   width: 190px;

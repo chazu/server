@@ -58,11 +58,11 @@ header {
             @extend .mr0;
         }
 
-        svg {
+        & svg {
             @extend .mr\-;
         }
 
-        i {
+        & i {
             @extend .abs-pos;
             @extend .fs\-\-;
             @extend .fw\+;
@@ -79,9 +79,13 @@ header {
             left: 8px;
         }
 
-        label {
+        & label {
             @extend .fw\+;
             @extend .cursor-pointer;
         }
+    }
+
+    & #uploadBooks {
+        display: none;
     }
 }

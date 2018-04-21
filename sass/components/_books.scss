@@ -34,7 +34,7 @@
             @extend .mr0;
         }
 
-        img {
+        & img {
             @extend .border-box;
     
             width: 175px;
@@ -61,7 +61,7 @@
             @extend .fw\+;
         }
 
-        li {
+        & li {
             @extend .flex;
             @extend .flex__center;
             @extend .lh;
