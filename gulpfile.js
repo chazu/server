@@ -18,16 +18,16 @@ const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('styles', function() {
-    gulp.src('sass/styles.scss')
+    gulp.src('src/sass/styles.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        .pipe(gulp.dest('static/css/'))
+        .pipe(gulp.dest('src/static/css/'))
 });
 
 //Watch task
 gulp.task('default',function() {
-    gulp.watch('sass/**/**/*.scss',['styles']);
+    gulp.watch('src/sass/**/**/*.scss',['styles']);
 });

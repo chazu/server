@@ -3,13 +3,22 @@
   "version": "0.1.0",
   "description": "",
   "private": true,
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
+    "concurrently": "^3.5.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.1.0",
-    "gulp-sass": "^3.1.0"
+    "gulp-sass": "^3.1.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4",
+    "react-router-dom": "^4.2.2"
   },
   "scripts": {
-    "start": "gulp"
+    "start": "concurrently --kill-others \"react-scripts start\" \"gulp\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "author": "Nirmal Almara"
 }

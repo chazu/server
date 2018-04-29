@@ -2,6 +2,8 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@import url(https://fonts.googleapis.com/css?family=Rancho);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600);
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -45,7 +47,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-header {
+.header {
   min-width: 100%;
   height: 60px;
   padding-top: 8px; }
@@ -127,7 +129,7 @@ header {
   background: #F56363;
   color: #FFFFFF; }
 
-root {
+#root {
   width: 1300px;
   min-height: 100vh;
   font-family: "Source Sans Pro", sans-serif;
@@ -161,7 +163,7 @@ root {
     margin-top: 30px !important; }
   .mt\+\+\+ {
     margin-top: 40px !important; }
-  .mt\+\+\+\+, .books-container, main {
+  .mt\+\+\+\+, .books-container, .main {
     margin-top: 50px !important; }
   .mt\- {
     margin-top: 5px !important; }
@@ -222,7 +224,7 @@ root {
 .mv {
   margin-top: 10px !important;
   margin-bottom: 10px !important; }
-  .mv0, root {
+  .mv0, #root {
     margin-top: 0 !important; }
   .mv\+ {
     margin-top: 20px !important; }
@@ -236,7 +238,7 @@ root {
     margin-top: 5px !important; }
   .mv\-\- {
     margin-top: 2px !important; }
-  .mv0, root {
+  .mv0, #root {
     margin-bottom: 0 !important; }
   .mv\+ {
     margin-bottom: 20px !important; }
@@ -371,7 +373,7 @@ root {
 .pv {
   padding-top: 10px !important;
   padding-bottom: 10px !important; }
-  .pv0, .search-box, root {
+  .pv0, .search-box, #root {
     padding-top: 0 !important; }
   .pv\+ {
     padding-top: 20px !important; }
@@ -385,7 +387,7 @@ root {
     padding-top: 5px !important; }
   .pv\-\-, .nav-right__item i {
     padding-top: 2px !important; }
-  .pv0, .search-box, root {
+  .pv0, .search-box, #root {
     padding-bottom: 0 !important; }
   .pv\+ {
     padding-bottom: 20px !important; }
@@ -407,7 +409,7 @@ root {
     padding-left: 0 !important; }
   .ph\+ {
     padding-left: 20px !important; }
-  .ph\+\+, root {
+  .ph\+\+, #root {
     padding-left: 30px !important; }
   .ph\+\+\+ {
     padding-left: 40px !important; }
@@ -421,7 +423,7 @@ root {
     padding-right: 0 !important; }
   .ph\+ {
     padding-right: 20px !important; }
-  .ph\+\+, root {
+  .ph\+\+, #root {
     padding-right: 30px !important; }
   .ph\+\+\+ {
     padding-right: 40px !important; }
@@ -451,7 +453,7 @@ root {
 .lh, .books-container__sidebar li {
   line-height: 20px; }
 
-.w1\/1, header, .currently-reading, .currently-reading__header, .currently-reading__main {
+.w1\/1, .header, .currently-reading, .currently-reading__header, .currently-reading__main {
   width: 100% !important; }
 
 .w1\/2 {
@@ -484,15 +486,15 @@ root {
 .block {
   display: block; }
 
-.margin-center, root {
+.margin-center, #root {
   margin-left: auto;
   margin-right: auto; }
 
-.flex, header, .nav-left, .nav-right, .nav-right__item, .books-container__main, .books-container__list, .books-container__sidebar li, .currently-reading__nav, .currently-reading__nav-item, .currently-reading__list, root {
+.flex, .header, .nav-left, .nav-right, .nav-right__item, .books-container__main, .books-container__list, .books-container__sidebar li, .currently-reading__nav, .currently-reading__nav-item, .currently-reading__list, #root {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex; }
-  .flex__column, root {
+  .flex__column, #root {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -509,7 +511,7 @@ root {
     -webkit-box-align: baseline;
     -ms-flex-align: baseline;
     align-items: baseline; }
-  .flex__center, header, .nav-right__item, .books-container__sidebar li, .currently-reading__nav-item {
+  .flex__center, .header, .nav-right__item, .books-container__sidebar li, .currently-reading__nav-item {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center; }
@@ -564,7 +566,7 @@ root {
 .outline-none, .search-box {
   outline: none; }
 
-.border-box, header, .search-box, .nav-right__item i, .books-container__item img, .currently-reading__item img, .currently-reading, .currently-reading__nav, root {
+.border-box, .header, .search-box, .nav-right__item i, .books-container__item img, .currently-reading__item img, .currently-reading, .currently-reading__nav, #root {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 

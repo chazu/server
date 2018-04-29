@@ -66,10 +66,12 @@ func StartServer() {
 	)
 
 	// Serve static files
-	r.Static("/static", path.Join(assetPath, "static"))
+	r.Static("/service-worker.js", path.Join(assetPath, "build/service-worker.js"))
+	r.Static("/static", path.Join(assetPath, "build/static"))
+	r.Static("/cover", path.Join(assetPath, "uploads/img"))
 
 	// HTML rendering
-	r.LoadHTMLGlob(path.Join(assetPath, "templates/*"))
+	r.LoadHTMLGlob(path.Join(assetPath, "build/index.html"))
 
 	// Gin handlers
 	r.GET("/", home.Home)

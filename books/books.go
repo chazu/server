@@ -20,9 +20,9 @@ import (
 )
 
 type Books struct {
-	Src  string `json:"src"`
-	Alt  string `json:"alt"`
-	Href string `json:"href"`
+	Src   string `json:"src"`
+	Title string `json:"title"`
+	Href  string `json:"href"`
 }
 
 // GetBooks ...
@@ -34,9 +34,9 @@ func GetBooks(c *gin.Context) {
 
 	books := []Books{
 		Books{
-			Src:  "static/jpg/b1.jpg",
-			Alt:  "dummy book",
-			Href: "/b1",
+			Src:   "cover/b1.jpg",
+			Title: "dummy book",
+			Href:  "/b1",
 		},
 	}
 	c.JSON(200, gin.H{

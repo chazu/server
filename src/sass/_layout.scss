@@ -3,7 +3,7 @@
     color: $color-white;
 }
 
-root {
+#root {
     @extend .flex;
     @extend .flex__column;
     @extend .mv0;
@@ -19,6 +19,6 @@ root {
     color: $text-color;
 }
 
-main {
+.main {
     @extend .mt\+\+\+\+;
 }
