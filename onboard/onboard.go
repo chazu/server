@@ -25,7 +25,7 @@ import (
 type Login struct {
 	FullName string `json:"fullname" binding:"required"`
 	Email    string `json:"email" binding:"required"`
-	UserName string `json:"user" binding:"required"`
+	UserName string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
