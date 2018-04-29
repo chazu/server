@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import CurrentlyReading from './CurrentlyReading';
-
 class Home extends Component {
-  render() {
+  render() {      
     return (
       <div className="main">
         <CurrentlyReading />

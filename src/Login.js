@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 
-class Login extends Component {
-    render() {
-      return (
-        <div className="main">
-          <div className="onboard-container">
-            asdf
-          </div>
-        </div>
-      );
-    }
+const Login = observer(class Login extends Component {
+  handleLogin = () => {
+    var data = {
+      fullname: document.getElementById('fullName').value,
+      email: document.getElementById('email').value,
+      username: document.getElementById('userName').value,
+      password: document.getElementById('password').value
+    };
+
+    console.log(data);
+
+    this.props.appState.authenticated = true;
   }
+
+  render() {
+    return (
+      <div className="main">
+        <div className="onboard-container">
+          <input type="text" id="fullName" />
+          <input type="email" id="email" />
+          <input type="text" id="userName" />
+          <input type="password" id="password" />
+          <button id="loginButton" onClick={this.handleLogin}>Submit</button>
+        </div>
+      </div>
+    );
+  }
+});
   
-  export default Login;
+export default Login;

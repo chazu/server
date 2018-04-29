@@ -4,11 +4,11 @@ import './static/css/styles.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render((
   <Router>
-    <Route path="/" component={App} />
+    <App />
   </Router>
 ), document.getElementById('root'));
 
