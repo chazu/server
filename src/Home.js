@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import CurrentlyReading from './CurrentlyReading';
 
-class Main extends Component {
+class Home extends Component {
   render() {
     return (
-      <div class="main">
+      <div className="main">
         <CurrentlyReading />
       </div>
     );
   }
 }
 
-export default Main;
+export default Home;

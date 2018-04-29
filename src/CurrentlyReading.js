@@ -88,7 +88,7 @@ class Main extends Component {
     render() {
         const { books } = this.state;
         return (
-            <div class="currently-reading">
+            <div className="currently-reading">
                 <Header />
                 <div className="currently-reading__main">
                     <div className="currently-reading__list">

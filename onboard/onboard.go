@@ -13,7 +13,7 @@ You should have received a copy of the GNU Affero General Public License
 along with joyread.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package books
+package onboard
 
 import (
 	"net/http"
@@ -21,27 +21,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Books struct {
-	Src   string `json:"src"`
-	Title string `json:"title"`
-	Href  string `json:"href"`
+// Login struct
+type Login struct {
+	FullName string `json:"fullname" binding:"required"`
+	Email    string `json:"email" binding:"required"`
+	UserName string `json:"user" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }
 
-// GetBooks ...
-func GetBooks(c *gin.Context) {
-	// port, _ := c.MustGet("port").(string)
-	// domainAddress, _ := c.MustGet("domainAddress").(string)
+// PostLogin ...
+func PostLogin(c *gin.Context) {
+	var form Login
 
-	// serverLocation := domainAddress + ":" + port
-
-	books := []Books{
-		Books{
-			Src:   "cover/b1.jpg",
-			Title: "dummy book",
-			Href:  "/b1",
-		},
+	if err := c.ShouldBind(&form); err == nil {
+		if form.UserName == "nirmal" && form.Password == "123" {
+			c.JSON(http.StatusMovedPermanently, gin.H{"status": "authorized"})
+		} else {
+			c.JSON(http.StatusUnauthorized, gin.H{"status": "unauthorized"})
+		}
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"books": books,
-	})
 }

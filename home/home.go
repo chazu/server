@@ -16,10 +16,12 @@ along with joyread.  If not, see <http://www.gnu.org/licenses/>.
 package home
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
 // Home ...
 func Home(c *gin.Context) {
-	c.HTML(200, "index.html", "")
+	c.HTML(http.StatusOK, "index.html", "")
 }

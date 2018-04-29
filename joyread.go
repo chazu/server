@@ -75,6 +75,7 @@ func StartServer() {
 
 	// Gin handlers
 	r.GET("/", home.Home)
+	r.POST("/login", onboard.PostLogin)
 	r.GET("/books", books.GetBooks)
 
 	// Listen and serve

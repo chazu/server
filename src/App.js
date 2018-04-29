@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 import Header from './Header';
-import Main from './Main';
+import Home from './Home';
+import Login from './Login';
 
-class App extends Component {
+const App = observer(class App extends Component {
   render() {
+    const authenticated = this.props.appState.authenticated;
+    console.log(authenticated)
     return (
       <div>
         <Header />
-        <Main />
+        { authenticated ? ( <Home /> ) : ( <Login /> ) }
       </div>
     );
   }
-}
+});
 
 export default App;
