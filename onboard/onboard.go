@@ -33,7 +33,7 @@ type Login struct {
 func PostLogin(c *gin.Context) {
 	var form Login
 
-	if err := c.ShouldBind(&form); err == nil {
+	if err := c.BindJSON(&form); err == nil {
 		if form.UserName == "nirmal" && form.Password == "123" {
 			c.JSON(http.StatusMovedPermanently, gin.H{"status": "authorized"})
 		} else {

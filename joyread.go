@@ -17,6 +17,7 @@ package joyread
 
 import (
 	// built-in packages
+	"database/sql"
 	"fmt"
 	"os"
 	"path"
@@ -24,17 +25,22 @@ import (
 
 	// vendor packages
 	"github.com/gin-gonic/gin"
+	_ "github.com/mattn/go-sqlite3"
 
 	// custom packages
 	"github.com/joyread/server/books"
+	"github.com/joyread/server/error"
 	"github.com/joyread/server/getenv"
 	"github.com/joyread/server/home"
 	"github.com/joyread/server/middleware"
+	"github.com/joyread/server/onboard"
 )
 
 const (
 	portDefault          = "8080"
 	portEnv              = "JOYREAD_PORT"
+	dbPathEnv            = "JOYREAD_DB_PATH"
+	dbPathDefault        = "."
 	domainAddressDefault = "127.0.0.1"
 	domainAddressEnv     = "JOYREAD_DOMAIN_ADDRESS"
 	assetPathEnv         = "JOYREAD_ASSET_PATH"
@@ -43,6 +49,7 @@ const (
 
 var (
 	serverPort    = portDefault
+	dbPath        = dbPathDefault
 	domainAddress = domainAddressDefault
 	assetPath     = assetPathDefault
 )
@@ -50,6 +57,7 @@ var (
 func init() {
 	fmt.Println("Running init ...")
 	serverPort = getenv.GetEnv(portEnv, portDefault)
+	dbPath = getenv.GetEnv(dbPathEnv, dbPathDefault)
 	domainAddress = getenv.GetEnv(domainAddressEnv, domainAddressDefault)
 	assetPath = getenv.GetEnv(assetPathEnv, assetPathDefault)
 }
@@ -73,10 +81,17 @@ func StartServer() {
 	// HTML rendering
 	r.LoadHTMLGlob(path.Join(assetPath, "build/index.html"))
 
+	// Open sqlite3 database
+	db, err := sql.Open("sqlite3", path.Join(dbPath, "joyread.db"))
+	error.CheckError(err)
+
+	// Close sqlite3 database when all the functions are done
+	defer db.Close()
+
 	// Gin handlers
 	r.GET("/", home.Home)
 	r.GET("/login", home.Home)
-	// r.POST("/login", onboard.PostLogin)
+	r.POST("/login", onboard.PostLogin)
 	r.GET("/books", books.GetBooks)
 
 	// Listen and serve

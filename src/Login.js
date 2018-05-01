@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
 const Login = observer(class Login extends Component {
-  handleLogin = () => {
+  handleLogin = (e) => {
+    e.preventDefault()
+
     var data = {
       fullname: document.getElementById('fullName').value,
       email: document.getElementById('email').value,
@@ -10,21 +12,34 @@ const Login = observer(class Login extends Component {
       password: document.getElementById('password').value
     };
 
-    console.log(data);
+    var jsonData = JSON.stringify(data)
 
-    this.props.appState.authenticated = true;
+    fetch('/login', {
+      method: 'POST',
+      body: jsonData
+    }).then(res => res.json())
+      .then(
+        (result) => {
+          if (result.status === 'authorized') {
+            this.props.appState.authenticated = true;
+          }
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
   }
 
   render() {
     return (
       <div className="main">
-        <div className="onboard-container">
+        <form className="onboard-container">
           <input type="text" id="fullName" />
           <input type="email" id="email" />
           <input type="text" id="userName" />
           <input type="password" id="password" />
-          <button id="loginButton" onClick={this.handleLogin}>Submit</button>
-        </div>
+          <input type="submit" onClick={this.handleLogin} />
+        </form>
       </div>
     );
   }
