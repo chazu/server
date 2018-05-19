@@ -72,6 +72,7 @@
         @extend .border;
         @extend .pv;
         @extend .border-box;
+        @extend .none;
 
         width: 220px;
         height: auto;
@@ -79,6 +80,10 @@
         top: 60px;
         right: 30px;
         z-index: 1;
+
+        &.open {
+            @extend .block;
+        }
 
         &:before {
             @extend .abs-pos;

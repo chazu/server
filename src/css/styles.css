@@ -425,10 +425,10 @@ table {
 .cursor-pointer, .header__logo, .header__menu, .header__notification, .header__books, .header__link {
   cursor: pointer; }
 
-.none {
+.none, .header__m-dropdown {
   display: none; }
 
-.block {
+.block, .header__m-dropdown.open {
   display: block; }
 
 .inline-block {
