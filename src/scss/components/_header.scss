@@ -112,10 +112,34 @@
         }
     }
 
+    &__n-dropdown {
+        @extend .header__m-dropdown;
+
+        width: 300px;
+        right: 150px;
+    }
+
     &__link {
         @extend .ph;
         @extend .pv\-;
         @extend .mb;
+
+        &--notification {
+            align-items: flex-start !important;
+
+            & span {
+                @extend .fw;
+                @extend .fs\-;
+
+                width: 260px;
+                margin-top: -4px;
+                line-height: 20px;
+
+                & em {
+                    @extend .fw\+;
+                }
+            }
+        }
 
         &:last-child {
             @extend .mb0;
