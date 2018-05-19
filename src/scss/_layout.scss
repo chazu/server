@@ -3,3 +3,9 @@ body {
     @extend .fs;
     @extend .text-color;
 }
+
+::selection {
+    @extend .brand-background;
+
+    color: white;
+}
