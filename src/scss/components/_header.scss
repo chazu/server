@@ -1,0 +1,68 @@
+.header {
+    @extend .w1300;
+    @extend .ph\+\+;
+    @extend .margin-center;
+
+    height: 60px;
+
+    &__logo {
+        @extend .abs-pos;
+        @extend .cursor-pointer;
+
+        width: 85px;
+        height: 38px;
+        top: 10px;
+        left: 50%;
+        margin-left: -42.5px;
+
+        img {
+            @extend .w1\/1;
+            
+            height: 100%;
+        }
+    }
+
+    &__left {
+        @extend .pull-left;
+        @extend .mt;
+    }
+
+    &__search {
+        width: 420px !important;
+    }
+
+    &__right {
+        @extend .pull-right;
+        @extend .mt\+;
+        @extend .flex;
+
+        & div {
+            @extend .mr\+\+;
+
+            &:last-child {
+                @extend .mr0;
+            }
+        }
+    }
+
+    &__menu, &__notification {
+        @extend .flex;
+        @extend .flex__center;
+        @extend .cursor-pointer;
+        @extend .fw\+;
+
+        & .icon {
+            @extend .mr\-;
+        }
+
+        &:hover {
+            @extend .text-hover;
+
+            svg {
+                path {
+                    fill: $brand-primary;
+                }
+            }
+        }
+    }
+}
