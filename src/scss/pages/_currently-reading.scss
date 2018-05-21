@@ -1,0 +1,22 @@
+.currently-reading {
+    @extend .rel-pos;
+    @extend .mt\+\+;
+    @extend .p\+;
+
+    background: $brand-secondary;
+
+    &__header {
+        @extend .w1\/1;
+        @extend .flex;
+        
+        height: 40px;
+    }
+
+    &__title {
+        @extend .fs\+;
+        @extend .fw\+;
+        @extend .p;
+
+        background: white;
+    }
+}

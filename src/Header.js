@@ -36,7 +36,7 @@ function MenuDropdown() {
 
 function NotificationDropdown() {
   return (
-    <div className="header__n-dropdown open">
+    <div className="header__n-dropdown">
       <a className="header__link header__link--notification"><i className="icon icon--small icon--dp"><img src={dp} alt="profile" /></i><span><em>Charles Bukowski</em> has commented on your annotation.</span></a>
     </div>
   );
