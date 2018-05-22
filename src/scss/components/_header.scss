@@ -43,7 +43,7 @@
         }
     }
 
-    &__menu, &__notification, &__books, &__link {
+    &__menu, &__notification, &__books, &__link, &__signup {
         @extend .flex;
         @extend .flex__center;
         @extend .cursor-pointer;

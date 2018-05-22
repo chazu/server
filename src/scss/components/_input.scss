@@ -1,4 +1,4 @@
-input[type="text"] {
+input[type="text"], input[type="email"], input[type="password"] {
     @extend .p;
     @extend .border;
     @extend .outline-none;

@@ -66,13 +66,13 @@ table {
   margin-top: 10px !important; }
   .mt0 {
     margin-top: 0 !important; }
-  .mt\+, .header__right {
+  .mt\+, .header__right, .onboard__name, .onboard__email, .onboard__password {
     margin-top: 20px !important; }
-  .mt\+\+, .currently-reading {
+  .mt\+\+, .currently-reading, .onboard__submit {
     margin-top: 30px !important; }
   .mt\+\+\+ {
     margin-top: 40px !important; }
-  .mt\+\+\+\+ {
+  .mt\+\+\+\+, .onboard {
     margin-top: 50px !important; }
   .mt\- {
     margin-top: 5px !important; }
@@ -125,7 +125,7 @@ table {
     margin-right: 40px !important; }
   .mr\+\+\+\+ {
     margin-right: 50px !important; }
-  .mr\-, .header__menu .icon, .header__notification .icon, .header__books .icon, .header__link .icon {
+  .mr\-, .header__menu .icon, .header__notification .icon, .header__books .icon, .header__link .icon, .header__signup .icon {
     margin-right: 5px !important; }
   .mr\-\- {
     margin-right: 2px !important; }
@@ -194,7 +194,7 @@ table {
   .mh\-\- {
     margin-right: 2px !important; }
 
-.p, input[type="text"], .currently-reading__title, .currently-reading__left, .currently-reading__right {
+.p, input[type="text"], input[type="email"], input[type="password"], .currently-reading__title, .currently-reading__left, .currently-reading__right {
   padding: 10px !important; }
   .p0 {
     padding: 0 !important; }
@@ -279,7 +279,7 @@ table {
   .pr\-\- {
     padding-right: 2px !important; }
 
-.pv, .header__m-dropdown, .header__n-dropdown {
+.pv, .button, .header__m-dropdown, .header__n-dropdown {
   padding-top: 10px !important;
   padding-bottom: 10px !important; }
   .pv0 {
@@ -318,7 +318,7 @@ table {
     padding-left: 0 !important; }
   .ph\+ {
     padding-left: 20px !important; }
-  .ph\+\+, body {
+  .ph\+\+, body, .button {
     padding-left: 30px !important; }
   .ph\+\+\+ {
     padding-left: 40px !important; }
@@ -332,7 +332,7 @@ table {
     padding-right: 0 !important; }
   .ph\+ {
     padding-right: 20px !important; }
-  .ph\+\+, body {
+  .ph\+\+, body, .button {
     padding-right: 30px !important; }
   .ph\+\+\+ {
     padding-right: 40px !important; }
@@ -343,7 +343,7 @@ table {
   .ph\-\- {
     padding-right: 2px !important; }
 
-.w1\/1, .header__logo img, .currently-reading__header {
+.w1\/1, .header__logo img, .currently-reading__header, .onboard__label, .onboard__name, .onboard__email, .onboard__password {
   width: 100% !important; }
 
 .w1\/2 {
@@ -362,12 +362,12 @@ table {
   font-size: 16px; }
   .fs\+, .currently-reading__title {
     font-size: 20px; }
-  .fs\-, input[type="text"], .header__link--notification span {
+  .fs\-, input[type="text"], input[type="email"], input[type="password"], .button, .header__link--notification span {
     font-size: 14px; }
 
 .fw, .header__link--notification span {
   font-weight: 400; }
-  .fw\+, .header__menu, .header__notification, .header__books, .header__link, .header__link--notification span em, .currently-reading__title {
+  .fw\+, .button, .header__menu, .header__notification, .header__books, .header__link, .header__signup, .header__link--notification span em, .currently-reading__title, .onboard__label {
     font-weight: 600; }
 
 .w1300, body {
@@ -379,10 +379,10 @@ table {
 .brand-secondary-color {
   color: #F5EFEF; }
 
-.brand-background, ::-moz-selection, .header__link:hover {
+.brand-background, ::-moz-selection, .button, .header__link:hover {
   background-color: #F56363; }
 
-.brand-background, ::selection, .header__link:hover {
+.brand-background, ::selection, .button, .header__link:hover {
   background-color: #F56363; }
 
 .brand-secondary-background {
@@ -394,7 +394,7 @@ table {
 .text-color, body {
   color: #676767; }
 
-.text-hover, .header__menu:hover, .header__notification:hover, .header__books:hover, .header__link:hover {
+.text-hover, .header__menu:hover, .header__notification:hover, .header__books:hover, .header__link:hover, .header__signup:hover {
   color: #F56363; }
 
 .italic {
@@ -418,27 +418,27 @@ table {
 .rel-pos, .header, .currently-reading {
   position: relative; }
 
-.border-box, body, input[type="text"], .header__m-dropdown, .header__n-dropdown, .currently-reading__left, .currently-reading__right {
+.border-box, body, input[type="text"], input[type="email"], input[type="password"], .button, .header__m-dropdown, .header__n-dropdown, .currently-reading__left, .currently-reading__right {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
-.cursor-pointer, .header__logo, .header__menu, .header__notification, .header__books, .header__link, .currently-reading__left, .currently-reading__right {
+.cursor-pointer, .button, .header__logo, .header__menu, .header__notification, .header__books, .header__link, .header__signup, .currently-reading__left, .currently-reading__right {
   cursor: pointer; }
 
 .none, .header__m-dropdown, .header__n-dropdown {
   display: none; }
 
-.block, .header__m-dropdown.open, .open.header__n-dropdown {
+.block, .header__m-dropdown.open, .open.header__n-dropdown, .onboard__label, .onboard__submit {
   display: block; }
 
 .inline-block {
   display: inline-block; }
 
-.margin-center, body {
+.margin-center, body, .onboard, .onboard__submit {
   margin-left: auto;
   margin-right: auto; }
 
-.flex, .header__right, .header__menu, .header__notification, .header__books, .header__link {
+.flex, .header__right, .header__menu, .header__notification, .header__books, .header__link, .header__signup {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex; }
@@ -459,7 +459,7 @@ table {
     -webkit-box-align: baseline;
     -ms-flex-align: baseline;
     align-items: baseline; }
-  .flex__center, .header__menu, .header__notification, .header__books, .header__link {
+  .flex__center, .header__menu, .header__notification, .header__books, .header__link, .header__signup {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center; }
@@ -505,17 +505,17 @@ table {
 .overflow-hidden {
   overflow: hidden; }
 
-.outline-none, input[type="text"] {
+.outline-none, input[type="text"], input[type="email"], input[type="password"], .button {
   outline: none; }
 
 .no-link {
   text-decoration: none;
   outline: none; }
 
-.border, input[type="text"], .header__m-dropdown, .header__n-dropdown {
+.border, input[type="text"], input[type="email"], input[type="password"], .header__m-dropdown, .header__n-dropdown {
   border: 1px solid #E7E4E4; }
 
-.border-focus, input[type="text"]:focus {
+.border-focus, input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
   border: 1px solid #F56363; }
 
 ::-moz-selection {
@@ -524,8 +524,12 @@ table {
 ::selection {
   color: white; }
 
-input[type="text"] {
+input[type="text"], input[type="email"], input[type="password"] {
   height: 36px; }
+
+.button {
+  color: white;
+  border: none; }
 
 .icon {
   width: 20px;
@@ -549,7 +553,7 @@ input[type="text"] {
       height: 100%; }
   .header__search {
     width: 420px !important; }
-  .header__menu:hover svg path, .header__notification:hover svg path, .header__books:hover svg path, .header__link:hover svg path {
+  .header__menu:hover svg path, .header__notification:hover svg path, .header__books:hover svg path, .header__link:hover svg path, .header__signup:hover svg path {
     fill: #F56363; }
   .header__m-dropdown, .header__n-dropdown {
     width: 220px;
@@ -605,3 +609,8 @@ input[type="text"] {
       background: #F56363; }
       .currently-reading__left:hover svg g, .currently-reading__right:hover svg g {
         stroke: white; }
+
+.onboard {
+  width: 300px; }
+  .onboard__label {
+    text-align: center; }
