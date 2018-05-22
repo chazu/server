@@ -515,7 +515,7 @@ table {
 .border, input[type="text"], .header__m-dropdown, .header__n-dropdown {
   border: 1px solid #E7E4E4; }
 
-.border-focus {
+.border-focus, input[type="text"]:focus {
   border: 1px solid #F56363; }
 
 ::-moz-selection {

@@ -6,4 +6,8 @@ input[type="text"] {
     @extend .fs\-;
 
     height: 36px;
+
+    &:focus {
+        @extend .border-focus;
+    }
 }
