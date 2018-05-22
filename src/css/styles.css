@@ -119,7 +119,7 @@ table {
     margin-right: 0 !important; }
   .mr\+ {
     margin-right: 20px !important; }
-  .mr\+\+, .header__right div {
+  .mr\+\+, .header__right div, .currently-reading__left {
     margin-right: 30px !important; }
   .mr\+\+\+ {
     margin-right: 40px !important; }
@@ -194,7 +194,7 @@ table {
   .mh\-\- {
     margin-right: 2px !important; }
 
-.p, input[type="text"], .currently-reading__title {
+.p, input[type="text"], .currently-reading__title, .currently-reading__left, .currently-reading__right {
   padding: 10px !important; }
   .p0 {
     padding: 0 !important; }
@@ -406,10 +406,10 @@ table {
 .letter-spacing {
   letter-spacing: 1px; }
 
-.pull-left, .header__left {
+.pull-left, .header__left, .currently-reading__title, .currently-reading__left, .currently-reading__right {
   float: left; }
 
-.pull-right, .header__right {
+.pull-right, .header__right, .currently-reading__nav {
   float: right; }
 
 .abs-pos, .header__logo, .header__m-dropdown, .header__n-dropdown, .header__m-dropdown:before, .header__n-dropdown:before, .header__m-dropdown:after, .header__n-dropdown:after {
@@ -418,11 +418,11 @@ table {
 .rel-pos, .header, .currently-reading {
   position: relative; }
 
-.border-box, body, input[type="text"], .header__m-dropdown, .header__n-dropdown {
+.border-box, body, input[type="text"], .header__m-dropdown, .header__n-dropdown, .currently-reading__left, .currently-reading__right {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
-.cursor-pointer, .header__logo, .header__menu, .header__notification, .header__books, .header__link {
+.cursor-pointer, .header__logo, .header__menu, .header__notification, .header__books, .header__link, .currently-reading__left, .currently-reading__right {
   cursor: pointer; }
 
 .none, .header__m-dropdown, .header__n-dropdown {
@@ -438,7 +438,7 @@ table {
   margin-left: auto;
   margin-right: auto; }
 
-.flex, .header__right, .header__menu, .header__notification, .header__books, .header__link, .currently-reading__header {
+.flex, .header__right, .header__menu, .header__notification, .header__books, .header__link {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex; }
@@ -598,3 +598,10 @@ input[type="text"] {
     height: 40px; }
   .currently-reading__title {
     background: white; }
+  .currently-reading__left, .currently-reading__right {
+    background: white;
+    height: 40px; }
+    .currently-reading__left:hover, .currently-reading__right:hover {
+      background: #F56363; }
+      .currently-reading__left:hover svg g, .currently-reading__right:hover svg g {
+        stroke: white; }
