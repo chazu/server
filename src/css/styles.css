@@ -556,7 +556,7 @@ input[type="text"] {
     height: auto;
     background: white;
     top: 60px;
-    right: 30px;
+    right: 0;
     z-index: 1; }
     .header__m-dropdown:before, .header__n-dropdown:before {
       content: "";
