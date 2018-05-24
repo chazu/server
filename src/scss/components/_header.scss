@@ -22,7 +22,8 @@
 
     &__left {
         @extend .pull-left;
-        @extend .mt;
+        
+        margin-top: 13px;
     }
 
     &__search {

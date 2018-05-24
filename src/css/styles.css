@@ -62,7 +62,7 @@ table {
   .m\-\- {
     margin: 2px !important; }
 
-.mt, .header__left {
+.mt {
   margin-top: 10px !important; }
   .mt0 {
     margin-top: 0 !important; }
@@ -490,9 +490,6 @@ table {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap; }
 
-.text-caps {
-  text-transform: uppercase; }
-
 .no-repeat {
   background-repeat: no-repeat; }
 
@@ -551,6 +548,8 @@ input[type="text"], input[type="email"], input[type="password"] {
     margin-left: -42.5px; }
     .header__logo img {
       height: 100%; }
+  .header__left {
+    margin-top: 13px; }
   .header__search {
     width: 420px !important; }
   .header__menu:hover svg path, .header__notification:hover svg path, .header__books:hover svg path, .header__link:hover svg path, .header__signup:hover svg path {
