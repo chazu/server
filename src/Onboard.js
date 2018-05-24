@@ -15,7 +15,7 @@ class Onboard extends Component {
                   <label className="onboard__label">Sign In</label>
                   <input type="email" className="onboard__email" placeholder="Email address" />
                   <input type="password" className="onboard__password" placeholder="Password" />
-                  <button className="button button-primary onboard__submit">Submit</button>
+                  <button className="button button-primary onboard__submit" onClick={() => onboard.signIn()}>Submit</button>
                 </div>
               :
                 <div className="onboard__inner">
@@ -23,7 +23,7 @@ class Onboard extends Component {
                   <input type="text" className="onboard__name" placeholder="Full name" />
                   <input type="email" className="onboard__email" placeholder="Email address" />
                   <input type="password" className="onboard__password" placeholder="Password" />
-                  <button className="button button-primary onboard__submit">Submit</button>
+                  <button className="button button-primary onboard__submit" onClick={() => onboard.signUp()}>Submit</button>
                 </div>
             }
           </div>
