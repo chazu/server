@@ -79,7 +79,7 @@ func StartServer() {
 	r.Static("/cover", path.Join(assetPath, "uploads/img"))
 
 	// HTML rendering
-	r.LoadHTMLGlob(path.Join(assetPath, "build/index.html"))
+	// r.LoadHTMLGlob(path.Join(assetPath, "build/index.html"))
 
 	// Open sqlite3 database
 	db, err := sql.Open("sqlite3", path.Join(dbPath, "joyread.db"))
@@ -90,8 +90,8 @@ func StartServer() {
 
 	// Gin handlers
 	r.GET("/", home.Home)
-	r.GET("/login", home.Home)
-	r.POST("/login", onboard.PostLogin)
+	r.GET("/signin", home.Home)
+	r.POST("/signin", onboard.PostSignIn)
 	r.GET("/books", books.GetBooks)
 
 	// Listen and serve

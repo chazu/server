@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Subscribe } from 'unstated';
 import OnboardContainer from './containers/OnboardContainer.js';
 
+var URLRoutes = {
+  signin: 'http://localhost:8080/signin',
+  signup: 'http://localhost:8080/signup'
+}
+
 class Onboard extends Component {
   render() {
     return (
@@ -13,9 +18,9 @@ class Onboard extends Component {
               ?
                 <div className="onboard__inner">
                   <label className="onboard__label">Sign In</label>
-                  <input type="email" className="onboard__email" placeholder="Email address" />
-                  <input type="password" className="onboard__password" placeholder="Password" />
-                  <button className="button button-primary onboard__submit" onClick={() => onboard.signIn()}>Submit</button>
+                  <input type="email" className="onboard__email" id="signInEmail" placeholder="Email address" />
+                  <input type="password" className="onboard__password" id="signInPassword" placeholder="Password" />
+                  <button className="button button-primary onboard__submit" onClick={() => onboard.signIn(URLRoutes.signin)}>Submit</button>
                 </div>
               :
                 <div className="onboard__inner">

@@ -23,21 +23,19 @@ import (
 
 // Login struct
 type Login struct {
-	FullName string `json:"fullname" binding:"required"`
 	Email    string `json:"email" binding:"required"`
-	UserName string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
-// PostLogin ...
-func PostLogin(c *gin.Context) {
+// PostSignIn ...
+func PostSignIn(c *gin.Context) {
 	var form Login
 
 	if err := c.BindJSON(&form); err == nil {
-		if form.UserName == "nirmal" && form.Password == "123" {
+		if form.Email == "demo@joyread.org" && form.Password == "demo" {
 			c.JSON(http.StatusMovedPermanently, gin.H{"status": "authorized"})
 		} else {
-			c.JSON(http.StatusUnauthorized, gin.H{"status": "unauthorized"})
+			c.JSON(http.StatusMovedPermanently, gin.H{"status": "unauthorized"})
 		}
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
