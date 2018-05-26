@@ -7,7 +7,7 @@ class OnboardContainer extends Container {
   constructor () {
     super();
 
-    var isTokenPresent = GetCookie("joyread") ? "true" : "false";
+    var isTokenPresent = GetCookie("joyread") ? true : false;
     
     this.state = { 
       isSignedUp: isTokenPresent,
