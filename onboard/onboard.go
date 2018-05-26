@@ -16,24 +16,118 @@ along with joyread.  If not, see <http://www.gnu.org/licenses/>.
 package onboard
 
 import (
+	"database/sql"
+	"fmt"
 	"net/http"
 
+	// vendor packages
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
+
+	// custom packages
+	cError "github.com/joyread/server/error"
 )
 
-// Login struct
-type Login struct {
+func _HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
+func _CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
+}
+
+func _GenerateJWTToken(passwordHash string) (string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{})
+	tokenString, err := token.SignedString([]byte(passwordHash))
+	return tokenString, err
+}
+
+func _ValidateJWTToken(tokenString string, passwordHash string) (bool, error) {
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+		}
+
+		return []byte(passwordHash), nil
+	})
+
+	return token.Valid, err
+}
+
+// SignUpStruct struct
+type SignUpStruct struct {
+	Fullname string `json:"name" binding:"required"`
 	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
-// PostSignIn ...
-func PostSignIn(c *gin.Context) {
-	var form Login
+// PostSignUp ...
+func PostSignUp(c *gin.Context) {
+	var form SignUpStruct
 
 	if err := c.BindJSON(&form); err == nil {
-		if form.Email == "demo@joyread.org" && form.Password == "demo" {
-			c.JSON(http.StatusMovedPermanently, gin.H{"status": "authorized"})
+		// Generate password hash using bcrypt
+		passwordHash, err := _HashPassword(form.Password)
+		cError.CheckError(err)
+
+		// Generate JWT token using the hash password above
+		tokenString, err := _GenerateJWTToken(passwordHash)
+		cError.CheckError(err)
+
+		db := c.MustGet("db").(*sql.DB)
+
+		stmt, err := db.Prepare("INSERT INTO `user` (name, email, password_hash) VALUES (?, ?, ?)")
+		cError.CheckError(err)
+
+		_, err = stmt.Exec(form.Fullname, form.Email, passwordHash)
+		cError.CheckError(err)
+
+		c.JSON(http.StatusMovedPermanently, gin.H{
+			"status": "registered",
+			"token":  tokenString,
+		})
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+}
+
+// SignInStruct struct
+type SignInStruct struct {
+	Email    string `json:"email" binding:"required"`
+	Password string `json:"password" binding:"required"`
+	Token    string `json:"token" binding:"required"`
+}
+
+// PostSignIn ...
+func PostSignIn(c *gin.Context) {
+	var form SignInStruct
+
+	if err := c.BindJSON(&form); err == nil {
+		db := c.MustGet("db").(*sql.DB)
+
+		rows, err := db.Query("SELECT `password_hash` FROM `user` WHERE `email` = ?", form.Email)
+		cError.CheckError(err)
+
+		var passwordHash string
+
+		if rows.Next() {
+			err := rows.Scan(&passwordHash)
+			cError.CheckError(err)
+		}
+		rows.Close()
+
+		if isPasswordValid := _CheckPasswordHash(form.Password, passwordHash); isPasswordValid == true {
+			isTokenValid, err := _ValidateJWTToken(form.Token, passwordHash)
+			cError.CheckError(err)
+
+			if isTokenValid == true {
+				c.JSON(http.StatusMovedPermanently, gin.H{"status": "authorized"})
+			} else {
+				c.JSON(http.StatusMovedPermanently, gin.H{"status": "unauthorized"})
+			}
 		} else {
 			c.JSON(http.StatusMovedPermanently, gin.H{"status": "unauthorized"})
 		}

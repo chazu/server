@@ -29,10 +29,11 @@ import (
 
 	// custom packages
 	"github.com/joyread/server/books"
-	"github.com/joyread/server/error"
+	cError "github.com/joyread/server/error"
 	"github.com/joyread/server/getenv"
 	"github.com/joyread/server/home"
 	"github.com/joyread/server/middleware"
+	"github.com/joyread/server/models"
 	"github.com/joyread/server/onboard"
 )
 
@@ -67,31 +68,35 @@ func StartServer() {
 	// Gin initiate
 	r := gin.Default()
 
-	// Use CORSMiddleware
-	r.Use(
-		middleware.CORSMiddleware(),
-		middleware.APIMiddleware(serverPort, domainAddress),
-	)
-
 	// Serve static files
 	r.Static("/service-worker.js", path.Join(assetPath, "build/service-worker.js"))
 	r.Static("/static", path.Join(assetPath, "build/static"))
 	r.Static("/cover", path.Join(assetPath, "uploads/img"))
 
 	// HTML rendering
-	// r.LoadHTMLGlob(path.Join(assetPath, "build/index.html"))
+	//r.LoadHTMLGlob(path.Join(assetPath, "build/index.html"))
 
 	// Open sqlite3 database
 	db, err := sql.Open("sqlite3", path.Join(dbPath, "joyread.db"))
-	error.CheckError(err)
+	cError.CheckError(err)
 
 	// Close sqlite3 database when all the functions are done
 	defer db.Close()
+
+	// Use CORSMiddleware
+	r.Use(
+		middleware.CORSMiddleware(),
+		middleware.APIMiddleware(serverPort, domainAddress, db),
+	)
+
+	models.CreateUser(db)
 
 	// Gin handlers
 	r.GET("/", home.Home)
 	r.GET("/signin", home.Home)
 	r.POST("/signin", onboard.PostSignIn)
+	r.GET("/signup", home.Home)
+	r.POST("/signup", onboard.PostSignUp)
 	r.GET("/books", books.GetBooks)
 
 	// Listen and serve

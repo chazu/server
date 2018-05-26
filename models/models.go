@@ -13,9 +13,20 @@ You should have received a copy of the GNU Affero General Public License
 along with joyread.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package env
+package models
 
-type Env struct {
-	Port          string
-	DomainAddress string
+import (
+	"database/sql"
+
+	// custom packages
+	cError "github.com/joyread/server/error"
+)
+
+// CreateUser ...
+func CreateUser(db *sql.DB) {
+	stmt, err := db.Prepare("CREATE TABLE IF NOT EXISTS `user` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` VARCHAR(255) NOT NULL, `email` VARCHAR(255) UNIQUE NOT NULL, `password_hash` VARCHAR(255) NOT NULL)")
+	cError.CheckError(err)
+
+	_, err = stmt.Exec()
+	cError.CheckError(err)
 }

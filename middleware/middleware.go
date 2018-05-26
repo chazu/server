@@ -16,6 +16,8 @@ along with joyread.  If not, see <http://www.gnu.org/licenses/>.
 package middleware
 
 import (
+	"database/sql"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -40,10 +42,11 @@ func CORSMiddleware() gin.HandlerFunc {
 }
 
 // APIMiddleware ...
-func APIMiddleware(port, domainAddress string) gin.HandlerFunc {
+func APIMiddleware(port string, domainAddress string, db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Set("port", port)
 		c.Set("domainAddress", domainAddress)
+		c.Set("db", db)
 		c.Next()
 	}
 }
