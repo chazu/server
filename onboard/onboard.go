@@ -19,6 +19,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	// vendor packages
 	"github.com/dgrijalva/jwt-go"
@@ -26,6 +27,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 
 	// custom packages
+	"github.com/joyread/server/email"
 	cError "github.com/joyread/server/error"
 	"github.com/joyread/server/models"
 )
@@ -85,7 +87,16 @@ func PostSignUp(c *gin.Context) {
 		db := c.MustGet("db").(*sql.DB)
 
 		models.InsertUser(db, form.Fullname, form.Email, passwordHash, tokenString)
-		models.InsertSMTP(db, form.SMTPServer, form.SMTPPort, form.SMTPEmail, form.SMTPPassword)
+
+		// Convert string to int64
+		smtpPort, _ := strconv.Atoi(form.SMTPPort)
+
+		models.InsertSMTP(db, form.SMTPServer, smtpPort, form.SMTPEmail, form.SMTPPassword)
+
+		// Send confirmation email
+		emailSubject := "Email confirmation - Joyread"
+		emailBody := "Hi,<br /><br />Please confirm this link."
+		go email.SendEmail(form.SMTPEmail, form.Email, emailSubject, emailBody, form.SMTPServer, smtpPort, form.SMTPEmail, form.SMTPPassword)
 
 		c.JSON(http.StatusMovedPermanently, gin.H{
 			"status": "registered",
