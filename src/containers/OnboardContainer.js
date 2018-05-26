@@ -1,13 +1,17 @@
 import { Container } from 'unstated';
 import SetCookie from '../cookies/SetCookie';
 import GetCookie from '../cookies/GetCookie';
+import DeleteCookie from '../cookies/DeleteCookie';
 
 class OnboardContainer extends Container {
   constructor () {
     super();
+
+    var isTokenPresent = GetCookie("joyread") ? "true" : "false";
+    
     this.state = { 
-      isSignedUp: false,
-      isSignedIn: false
+      isSignedUp: isTokenPresent,
+      isSignedIn: isTokenPresent
     };
   }
 
@@ -34,10 +38,9 @@ class OnboardContainer extends Container {
       return response.json();
     })
     .then((data) => {
-      console.log(data)
       if (data.status === "registered") {
-        console.log(data.token)
-        SetCookie(email, data.token, 30);
+        DeleteCookie("joyread")
+        SetCookie("joyread", data.token, 30);
         
         this.setState({ isSignedUp: true });
       } else {
@@ -49,7 +52,7 @@ class OnboardContainer extends Container {
   signIn(url) {
     var email = document.getElementById('signInEmail').value;
     var password = document.getElementById('signInPassword').value;
-    var cookieToken = GetCookie(email);
+    var cookieToken = GetCookie("joyread");
 
     var data = {
       email: email,
