@@ -9,8 +9,8 @@ class OnboardContainer extends Container {
 
     var isTokenPresent = GetCookie("joyread") ? true : false;
     
-    this.state = { 
-      isSignedUp: true,
+    this.state = {
+      isSignedUp: false,
       isSignedIn: isTokenPresent
     };
   }
@@ -19,11 +19,19 @@ class OnboardContainer extends Container {
     var name = document.getElementById('signUpName').value;
     var email = document.getElementById('signUpEmail').value;
     var password = document.getElementById('signUpPassword').value;
+    var smtpServer = document.getElementById('signUpSMTPServer').value;
+    var smtpPort = document.getElementById('signUpSMTPPort').value;
+    var smtpEmail = document.getElementById('signUpSMTPEmail').value;
+    var smtpPassword = document.getElementById('signUpSMTPPassword').value;
 
     var data = {
       name: name,
       email: email,
-      password: password
+      password: password,
+      smtp_server: smtpServer,
+      smtp_port: smtpPort,
+      smtp_email: smtpEmail,
+      smtp_password: smtpPassword
     }
 
     fetch(url, {

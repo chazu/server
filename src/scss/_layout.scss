@@ -6,6 +6,8 @@ body {
     @extend .ph\+\+;
     @extend .margin-center;
     @extend .border-box;
+
+    line-height: 20px;
 }
 
 ::selection {

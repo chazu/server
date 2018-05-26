@@ -15,7 +15,10 @@ along with joyread.  If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
-import joyread "github.com/joyread/server"
+import (
+	joyread "github.com/joyread/server"
+	_ "github.com/mattn/go-sqlite3"
+)
 
 func main() {
 	joyread.StartServer()

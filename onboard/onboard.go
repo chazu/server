@@ -27,6 +27,7 @@ import (
 
 	// custom packages
 	cError "github.com/joyread/server/error"
+	"github.com/joyread/server/models"
 )
 
 func _HashPassword(password string) (string, error) {
@@ -59,9 +60,13 @@ func _ValidateJWTToken(tokenString string, passwordHash string) (bool, error) {
 
 // SignUpStruct struct
 type SignUpStruct struct {
-	Fullname string `json:"name" binding:"required"`
-	Email    string `json:"email" binding:"required"`
-	Password string `json:"password" binding:"required"`
+	Fullname     string `json:"name" binding:"required"`
+	Email        string `json:"email" binding:"required"`
+	Password     string `json:"password" binding:"required"`
+	SMTPServer   string `json:"smtp_server" binding:"required"`
+	SMTPPort     string `json:"smtp_port" binding:"required"`
+	SMTPEmail    string `json:"smtp_email" binding:"required"`
+	SMTPPassword string `json:"smtp_password" binding:"required"`
 }
 
 // PostSignUp ...
@@ -79,11 +84,8 @@ func PostSignUp(c *gin.Context) {
 
 		db := c.MustGet("db").(*sql.DB)
 
-		stmt, err := db.Prepare("INSERT INTO `user` (name, email, password_hash, jwt_token) VALUES (?, ?, ?, ?)")
-		cError.CheckError(err)
-
-		_, err = stmt.Exec(form.Fullname, form.Email, passwordHash, tokenString)
-		cError.CheckError(err)
+		models.InsertUser(db, form.Fullname, form.Email, passwordHash, tokenString)
+		models.InsertSMTP(db, form.SMTPServer, form.SMTPPort, form.SMTPEmail, form.SMTPPassword)
 
 		c.JSON(http.StatusMovedPermanently, gin.H{
 			"status": "registered",
@@ -107,19 +109,7 @@ func PostSignIn(c *gin.Context) {
 	if err := c.BindJSON(&form); err == nil {
 		db := c.MustGet("db").(*sql.DB)
 
-		rows, err := db.Query("SELECT `password_hash`, `jwt_token` FROM `user` WHERE `email` = ?", form.Email)
-		cError.CheckError(err)
-
-		var (
-			passwordHash string
-			tokenString  string
-		)
-
-		if rows.Next() {
-			err := rows.Scan(&passwordHash, &tokenString)
-			cError.CheckError(err)
-		}
-		rows.Close()
+		passwordHash, tokenString := models.SelectPasswordHashAndJWTToken(db, form.Email)
 
 		if isPasswordValid := _CheckPasswordHash(form.Password, passwordHash); isPasswordValid == true {
 			isTokenValid, err := _ValidateJWTToken(tokenString, passwordHash)

@@ -30,3 +30,49 @@ func CreateUser(db *sql.DB) {
 	_, err = stmt.Exec()
 	cError.CheckError(err)
 }
+
+// InsertUser ...
+func InsertUser(db *sql.DB, name string, email string, passwordHash string, tokenString string) {
+	stmt, err := db.Prepare("INSERT INTO `user` (name, email, password_hash, jwt_token) VALUES (?, ?, ?, ?)")
+	cError.CheckError(err)
+
+	_, err = stmt.Exec(name, email, passwordHash, tokenString)
+	cError.CheckError(err)
+}
+
+// SelectPasswordHashAndJWTToken ...
+func SelectPasswordHashAndJWTToken(db *sql.DB, email string) (string, string) {
+	rows, err := db.Query("SELECT `password_hash`, `jwt_token` FROM `user` WHERE `email` = ?", email)
+	cError.CheckError(err)
+
+	var (
+		passwordHash string
+		tokenString  string
+	)
+
+	if rows.Next() {
+		err := rows.Scan(&passwordHash, &tokenString)
+		cError.CheckError(err)
+	}
+	rows.Close()
+
+	return passwordHash, tokenString
+}
+
+// CreateSMTP ...
+func CreateSMTP(db *sql.DB) {
+	stmt, err := db.Prepare("CREATE TABLE IF NOT EXISTS `smtp` (`server` VARCHAR(255) NOT NULL, `port` VARCHAR(255) NOT NULL, `email` VARCHAR(255) NOT NULL, `password` VARCHAR(255) NOT NULL)")
+	cError.CheckError(err)
+
+	_, err = stmt.Exec()
+	cError.CheckError(err)
+}
+
+// InsertSMTP ...
+func InsertSMTP(db *sql.DB, server string, port string, email string, password string) {
+	stmt, err := db.Prepare("INSERT INTO `smtp` (server, port, email, password) VALUES (?, ?, ?, ?)")
+	cError.CheckError(err)
+
+	_, err = stmt.Exec(server, port, email, password)
+	cError.CheckError(err)
+}

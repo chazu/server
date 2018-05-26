@@ -25,7 +25,6 @@ import (
 
 	// vendor packages
 	"github.com/gin-gonic/gin"
-	_ "github.com/mattn/go-sqlite3"
 
 	// custom packages
 	"github.com/joyread/server/books"
@@ -90,6 +89,7 @@ func StartServer() {
 	)
 
 	models.CreateUser(db)
+	models.CreateSMTP(db)
 
 	// Gin handlers
 	r.GET("/", home.Home)
