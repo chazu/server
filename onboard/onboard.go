@@ -79,10 +79,10 @@ func PostSignUp(c *gin.Context) {
 
 		db := c.MustGet("db").(*sql.DB)
 
-		stmt, err := db.Prepare("INSERT INTO `user` (name, email, password_hash) VALUES (?, ?, ?)")
+		stmt, err := db.Prepare("INSERT INTO `user` (name, email, password_hash, jwt_token) VALUES (?, ?, ?, ?)")
 		cError.CheckError(err)
 
-		_, err = stmt.Exec(form.Fullname, form.Email, passwordHash)
+		_, err = stmt.Exec(form.Fullname, form.Email, passwordHash, tokenString)
 		cError.CheckError(err)
 
 		c.JSON(http.StatusMovedPermanently, gin.H{
@@ -98,7 +98,6 @@ func PostSignUp(c *gin.Context) {
 type SignInStruct struct {
 	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
-	Token    string `json:"token" binding:"required"`
 }
 
 // PostSignIn ...
@@ -108,23 +107,29 @@ func PostSignIn(c *gin.Context) {
 	if err := c.BindJSON(&form); err == nil {
 		db := c.MustGet("db").(*sql.DB)
 
-		rows, err := db.Query("SELECT `password_hash` FROM `user` WHERE `email` = ?", form.Email)
+		rows, err := db.Query("SELECT `password_hash`, `jwt_token` FROM `user` WHERE `email` = ?", form.Email)
 		cError.CheckError(err)
 
-		var passwordHash string
+		var (
+			passwordHash string
+			tokenString  string
+		)
 
 		if rows.Next() {
-			err := rows.Scan(&passwordHash)
+			err := rows.Scan(&passwordHash, &tokenString)
 			cError.CheckError(err)
 		}
 		rows.Close()
 
 		if isPasswordValid := _CheckPasswordHash(form.Password, passwordHash); isPasswordValid == true {
-			isTokenValid, err := _ValidateJWTToken(form.Token, passwordHash)
+			isTokenValid, err := _ValidateJWTToken(tokenString, passwordHash)
 			cError.CheckError(err)
 
 			if isTokenValid == true {
-				c.JSON(http.StatusMovedPermanently, gin.H{"status": "authorized"})
+				c.JSON(http.StatusMovedPermanently, gin.H{
+					"status": "authorized",
+					"token":  tokenString,
+				})
 			} else {
 				c.JSON(http.StatusMovedPermanently, gin.H{"status": "unauthorized"})
 			}

@@ -10,7 +10,7 @@ class OnboardContainer extends Container {
     var isTokenPresent = GetCookie("joyread") ? true : false;
     
     this.state = { 
-      isSignedUp: isTokenPresent,
+      isSignedUp: true,
       isSignedIn: isTokenPresent
     };
   }
@@ -39,7 +39,7 @@ class OnboardContainer extends Container {
     })
     .then((data) => {
       if (data.status === "registered") {
-        DeleteCookie("joyread")
+        DeleteCookie("joyread");
         SetCookie("joyread", data.token, 30);
         
         this.setState({ isSignedUp: true });
@@ -52,12 +52,10 @@ class OnboardContainer extends Container {
   signIn(url) {
     var email = document.getElementById('signInEmail').value;
     var password = document.getElementById('signInPassword').value;
-    var cookieToken = GetCookie("joyread");
 
     var data = {
       email: email,
-      password: password,
-      token: cookieToken
+      password: password
     }
 
     fetch(url, {
@@ -73,6 +71,9 @@ class OnboardContainer extends Container {
     })
     .then((data) => {
       if (data.status === "authorized") {
+        DeleteCookie("joyread");
+        SetCookie("joyread", data.token, 30);
+
         this.setState({ isSignedIn: true });
       } else {
         alert('Your email address or password is incorrect.');
@@ -81,6 +82,7 @@ class OnboardContainer extends Container {
   }
 
   signOut() {
+    DeleteCookie("joyread")
     this.setState({ isSignedIn: false });
   }
 }
