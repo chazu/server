@@ -42,10 +42,8 @@ func CORSMiddleware() gin.HandlerFunc {
 }
 
 // APIMiddleware ...
-func APIMiddleware(port string, domainAddress string, db *sql.DB) gin.HandlerFunc {
+func APIMiddleware(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Set("port", port)
-		c.Set("domainAddress", domainAddress)
 		c.Set("db", db)
 		c.Next()
 	}

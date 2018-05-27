@@ -37,28 +37,24 @@ import (
 )
 
 const (
-	portDefault          = "8080"
-	portEnv              = "JOYREAD_PORT"
-	dbPathEnv            = "JOYREAD_DB_PATH"
-	dbPathDefault        = "."
-	domainAddressDefault = "127.0.0.1"
-	domainAddressEnv     = "JOYREAD_DOMAIN_ADDRESS"
-	assetPathEnv         = "JOYREAD_ASSET_PATH"
-	assetPathDefault     = "."
+	portDefault      = "8080"
+	portEnv          = "JOYREAD_PORT"
+	dbPathEnv        = "JOYREAD_DB_PATH"
+	dbPathDefault    = "."
+	assetPathEnv     = "JOYREAD_ASSET_PATH"
+	assetPathDefault = "."
 )
 
 var (
-	serverPort    = portDefault
-	dbPath        = dbPathDefault
-	domainAddress = domainAddressDefault
-	assetPath     = assetPathDefault
+	serverPort = portDefault
+	dbPath     = dbPathDefault
+	assetPath  = assetPathDefault
 )
 
 func init() {
 	fmt.Println("Running init ...")
 	serverPort = getenv.GetEnv(portEnv, portDefault)
 	dbPath = getenv.GetEnv(dbPathEnv, dbPathDefault)
-	domainAddress = getenv.GetEnv(domainAddressEnv, domainAddressDefault)
 	assetPath = getenv.GetEnv(assetPathEnv, assetPathDefault)
 }
 
@@ -85,7 +81,7 @@ func StartServer() {
 	// Use CORSMiddleware
 	r.Use(
 		middleware.CORSMiddleware(),
-		middleware.APIMiddleware(serverPort, domainAddress, db),
+		middleware.APIMiddleware(db),
 	)
 
 	models.CreateUser(db)
