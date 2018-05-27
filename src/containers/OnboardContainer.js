@@ -10,7 +10,7 @@ class OnboardContainer extends Container {
     var isTokenPresent = GetCookie("joyread") ? true : false;
     
     this.state = {
-      isSignedUp: false,
+      isSignedUp: true, // pull info from backend if admin had already signed up
       isSignedIn: isTokenPresent
     };
   }

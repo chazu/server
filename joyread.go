@@ -73,7 +73,7 @@ func StartServer() {
 	r.Static("/cover", path.Join(assetPath, "uploads/img"))
 
 	// HTML rendering
-	//r.LoadHTMLGlob(path.Join(assetPath, "build/index.html"))
+	r.LoadHTMLGlob(path.Join(assetPath, "build/index.html"))
 
 	// Open sqlite3 database
 	db, err := sql.Open("sqlite3", path.Join(dbPath, "joyread.db"))

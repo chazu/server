@@ -1,35 +1,33 @@
 import React, { Component } from 'react';
-import { Subscribe } from 'unstated';
-import { Route, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import './css/styles.css';
-import Onboard from './Onboard';
+import OnboardSignUp from './onboard/OnboardSignUp';
+import OnboardSignIn from './onboard/OnboardSignIn';
+import Home from './Home';
 import Header from './Header';
-import CurrentlyReading from './CurrentlyReading';
-import OnboardContainer from './containers/OnboardContainer';
+
+var apiRoutes = {
+  signin: 'http://localhost:8080/signin',
+  signup: 'http://localhost:8080/signup'
+}
 
 class App extends Component {
   render() {
     return (
-      <Subscribe to={[OnboardContainer]}>
-        {onboard => (
-          <div className="app">
-            {
-              onboard.state.isSignedIn
-              ? 
-                <div className="app__inner">
-                  <Header />
-                  <CurrentlyReading />
-                </div>
-              :
-                <div className="app__inner">
-                  <Header />
-                  <Onboard />
-                </div>
-            }
-          </div>
-          )
-        }
-      </Subscribe>
+      <div className="app">
+        <Header />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route
+            path="/signup"
+            render={(props) => <OnboardSignUp {...props} signUpAPI={apiRoutes.signup} />}
+          />
+          <Route
+            path="/signin"
+            render={(props) => <OnboardSignIn {...props} signInAPI={apiRoutes.signin} />}
+          />
+        </Switch>
+      </div>
     );
   }
 }
